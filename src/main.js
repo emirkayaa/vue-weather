@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
 import Toast from 'vue-toastification'
@@ -26,6 +27,8 @@ const toastOptions = {
   maxToasts: 3,
   newestOnTop: true
 }
+
+pinia.use(piniaPersistedstate)
 
 app.use(pinia)
 app.use(router)

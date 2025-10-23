@@ -1,78 +1,73 @@
+import { defineStore } from "pinia";
+import { ref, computed } from "vue";
 
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import {useToast} from 'vue-toastification'
+export const useAuthStore = defineStore("auth", () => {
+  const user = ref(null);
+  const isAuthenticated = ref(false);
+  const userData = ref({
+    email: "test@demo.com",
+    password: "Test1234",
+    name: "Emirhan",
+  });
 
-export const useAuthStore = defineStore('auth', () => {
-    const user = ref(null)
-    const isAuthenticated = ref(false)
-    const toast = useToast()
-    const userData = ref({
-        email: 'test@demo.com',
-        password: 'Test1234',
-        name: 'Emirhan',
-    });
+  const userName = computed(() => {
+    return user.value ? user.value.name : "";
+  });
+  const userEmail = computed(() => {
+    return user.value ? user.value.email : "";
+  });
 
-    const userName = computed(() => {
-        return user.value ? user.value.name : ''
-    })
-    const userEmail = computed(() => {
-        return user.value ? user.value.email : ''
-    })
+  const login = (email, password) => {
+    try {
+      if (email === userData.value.email && password === userData.value.password) {
+        user.value = {
+          name: userData.value.name,
+          email: userData.value.email,
+        };
+        isAuthenticated.value = true;
+        localStorage.setItem("user", JSON.stringify(user.value));
+        localStorage.setItem("isAuthenticated", "true");
 
-    const login = (email, password) => {
-        try {
-            if (email === userData.value.email && password === userData.value.password) {
-            user.value = {
-                name: userData.value.name,
-                email: userData.value.email,
-            }
-            isAuthenticated.value = true
-            localStorage.setItem('user', JSON.stringify(user.value))
-            localStorage.setItem('isAuthenticated', 'true')
-           
-            return true
-        }else {
-             user.value = null
-            isAuthenticated.value = false
-        }
-        } catch (error) {
-            console.error('Login failed:', error)
-        }
-
-        return false
+        return true;
+      } else {
+        user.value = null;
+        isAuthenticated.value = false;
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
     }
 
-    const logout = () => {
-        user.value = null
-        isAuthenticated.value = false
-        localStorage.removeItem('user')
-        localStorage.removeItem('isAuthenticated')
+    return false;
+  };
+
+  const logout = () => {
+    user.value = null;
+    isAuthenticated.value = false;
+    localStorage.removeItem("user");
+    localStorage.removeItem("isAuthenticated");
+  };
+
+  const initializeAuth = () => {
+    const localUser = localStorage.getItem("user");
+    const localAuth = localStorage.getItem("isAuthenticated");
+
+    if (localUser && localAuth === "true") {
+      user.value = JSON.parse(localUser);
+      isAuthenticated.value = true;
+      return true;
     }
+    return false;
+  };
 
-    const initializeAuth = () => {
-        const localUser = localStorage.getItem('user')
-        const localAuth = localStorage.getItem('isAuthenticated')
+  initializeAuth();
 
-        if (localUser && localAuth === 'true') {
-            user.value = JSON.parse(localUser)
-            isAuthenticated.value = true
-            return true
-        }
-        return false
-    }
-
-    
-
-    initializeAuth()
-
-    return {
-        user,
-        isAuthenticated,
-        userName,
-        userEmail,
-        login,
-        logout,
-        initializeAuth,
-    }
-})
+  return {
+    user,
+    isAuthenticated,
+    userName,
+    userEmail,
+    login,
+    logout,
+    initializeAuth,
+  };
+});

@@ -22,19 +22,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore()
 
-    
     if (to.path === '/login') {
         authStore.logout()
         return next()
     }
 
-    
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
         return next('/login')
     }
 
     next()
 })
-
 
 export default router;

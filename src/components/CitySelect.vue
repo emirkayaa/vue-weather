@@ -7,7 +7,7 @@
         type="text"
         placeholder="Şehir ismini yazın..."
         @input="onInput"
-        class="w-full px-4 py-3 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
+        class="w-full px-4 py-3 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
       />
       <div v-if="loading" class="text-sm text-white mt-1">Yükleniyor...</div>
       <ul
@@ -23,7 +23,6 @@
           {{ city.name }}, {{ city.country }}
         </li>
       </ul>
-      
     </div>
   </div>
 </template>
@@ -31,7 +30,7 @@
 <script setup>
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
-import {searchCity} from '../../service/weatherService'
+import { searchCity } from "../../service/weatherService";
 
 const emit = defineEmits(["citySelected"]);
 
@@ -41,7 +40,6 @@ const selectedCity = ref(null);
 const loading = ref(false);
 const toast = useToast();
 let timeout = null;
-
 
 const selectCity = (city) => {
   selectedCity.value = city;
@@ -58,15 +56,14 @@ const onInput = () => {
   }
 
   timeout = setTimeout(() => {
-    searchCity(query.value,loading.value).then((results) => {
+    searchCity(query.value, loading.value).then((results) => {
       cities.value = results || [];
       if (cities.value.length === 0) {
         toast.error("Şehir bulunamadı. Lütfen başka bir isim deneyin.");
       }
     });
-  }, 150);
+  }, 300);
 };
-
 </script>
 
 <style scoped>

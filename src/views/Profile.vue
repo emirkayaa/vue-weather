@@ -32,10 +32,10 @@
       </div>
       <div v-if="lastCity" class="mt-6 text-blue-600 font-medium text-center flex flex-col justify-end">
        <span>
-        Merhaba {{ user?.name }}, bugün {{ lastCity?.name }} şehrinde hava durumu {{ lastWeatherData.current.temperature_2m }}
-            {{ lastWeatherData.current_units.temperature_2m }} olarak ölçüldü.
+        Merhaba {{ user?.name }}, bugün {{ lastCity?.name }} şehrinde hava durumu {{ lastWeatherData?.current?.temperature_2m }}
+            {{ lastWeatherData?.current_units?.temperature_2m }} olarak ölçüldü.
        </span> 
-        <div class="flex justify-between">
+        <div class="flex justify-between mt-3">
             <RouterLink
         to="/home"
         class="flex justify-end items-center gap-2 text-gray-600 hover:text-gray-800 transition border border-gray-500 bg-gray-100 w-fit p-2 rounded"
@@ -67,6 +67,7 @@ const store = useWeatherStore();
 const auth = useAuthStore();
 const { lastCity, lastWeatherData } = storeToRefs(store);
 
+console.log(store)
 const logout = () => {
     auth.logout();
     router.push('/login')

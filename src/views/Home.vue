@@ -4,22 +4,22 @@
     :class="backgroundClass"
   >
     <div class="absolute top-4 right-4 sm:top-6 sm:right-6 flex gap-3">
-      <router-link
+      <RouterLink
         class="p-2 sm:p-3 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 shadow-lg transition-all duration-300"
         to="/profile"
         title="Profil"
       >
         <CircleUserRound class="text-white w-6 h-6 sm:w-8 sm:h-8" />
-      </router-link>
+      </RouterLink>
 
-      <router-link
+      <RouterLink
         class="p-2 sm:p-3 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 shadow-lg transition-all duration-300"
         to="/logout"
         title="Çıkış"
         @click="logout"
       >
         <LogOut class="text-red-500 w-6 h-6 sm:w-8 sm:h-8" />
-      </router-link>
+      </RouterLink>
     </div>
 
     <div class="relative z-10 w-full max-w-2xl">
@@ -50,7 +50,7 @@
           </h2>
 
           <div class="flex flex-col items-center justify-center space-y-4 sm:space-y-6">
-            <div class="animate-bounce-slow">
+            <div class="animate-bounce">
               <component
                 :is="weatherIconComponent"
                 :size="iconSize"
@@ -130,22 +130,5 @@ const backgroundClass = computed(() => {
   if ([95, 96, 99].includes(code)) return "bg-gradient-to-br from-gray-800 via-purple-900 to-indigo-950";
   return "bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500";
 });
-</script>
 
-<style scoped>
-@keyframes bounce-slow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-.animate-bounce-slow {
-  animation: bounce-slow 3s ease-in-out infinite;
-}
-.bg-gradient-to-br {
-  transition: background 0.7s ease-in-out;
-}
-</style>
+</script>
