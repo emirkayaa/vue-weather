@@ -67,7 +67,6 @@ const store = useWeatherStore();
 const auth = useAuthStore();
 const { lastCity, lastWeatherData } = storeToRefs(store);
 
-console.log(store)
 const logout = () => {
     auth.logout();
     router.push('/login')
