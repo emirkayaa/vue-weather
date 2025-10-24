@@ -35,7 +35,7 @@ import { useWeatherStore } from "../store/weather";
 
 const emit = defineEmits(["citySelected"]);
 const store = useWeatherStore();
-const query = ref(store.lastCity.name || "");
+const query = ref(store.lastCity?.name || "");
 const cities = ref([]);
 const selectedCity = ref(null);
 const loading = ref(false);
