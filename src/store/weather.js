@@ -30,8 +30,13 @@ export const useWeatherStore = defineStore("weather", () => {
       }
     } catch (err) {}
   };
+  const resetWeatherData = () => {
+    lastCity.value = null;
+    lastWeatherData.value = {};
+    localStorage.removeItem("weatherStore");
+  };
 
   loadWeatherData();
 
-  return { lastCity, lastWeatherData, setWeatherData, loadWeatherData };
+  return { lastCity, lastWeatherData, setWeatherData, loadWeatherData,resetWeatherData };
 });

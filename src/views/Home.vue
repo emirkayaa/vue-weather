@@ -60,7 +60,7 @@
             </div>
 
             <div class="text-5xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl">
-              {{ cityData.current.temperature_2m }}{{ cityData.current_units.temperature_2m }}
+              {{ cityData?.current?.temperature_2m }}{{ cityData?.current_units?.temperature_2m }}
             </div>
 
             <div class="px-4 sm:px-6 py-2 sm:py-3 bg-white/30 backdrop-blur-sm rounded-full text-center">
@@ -85,15 +85,14 @@ import { getData, weatherDescriptions, weatherIcons } from "../../service/weathe
 import router from "../router";
 
 const weatherStore = useWeatherStore();
-const selectedCity = ref(weatherStore.lastCity || null);
-const cityData = ref(weatherStore.lastWeatherData || null);
+const selectedCity = ref(weatherStore?.lastCity || null);
+const cityData = ref(weatherStore?.lastWeatherData || null);
 const auth = useAuthStore();
 const windowWidth = ref(window.innerWidth);
 
 const onCitySelected = async (city) => {
   selectedCity.value = city;
-  const data = await getData(city);
-  cityData.value = data;
+  cityData.value = await getData(city);
   weatherStore.setWeatherData(selectedCity.value, cityData.value);
 };
 

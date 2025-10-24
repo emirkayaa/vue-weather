@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import { useWeatherStore } from "./weather";
 
 export const useAuthStore = defineStore("auth", () => {
   const user = ref(null);
@@ -41,9 +42,11 @@ export const useAuthStore = defineStore("auth", () => {
   const logout = () => {
     user.value = null;
     isAuthenticated.value = false;
+    const weatherStore = useWeatherStore();
+    weatherStore.resetWeatherData();
     localStorage.removeItem("user");
     localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("weatherStore")
+    
   };
 
   const initializeAuth = () => {
