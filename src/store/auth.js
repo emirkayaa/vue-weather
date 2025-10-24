@@ -43,6 +43,7 @@ export const useAuthStore = defineStore("auth", () => {
     isAuthenticated.value = false;
     localStorage.removeItem("user");
     localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("weatherStore")
   };
 
   const initializeAuth = () => {
