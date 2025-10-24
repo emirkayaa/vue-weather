@@ -27,7 +27,6 @@ export const getData = async (city) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Veri alma hatası:", error);
     return null;
   }
 };

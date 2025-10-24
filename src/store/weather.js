@@ -17,9 +17,7 @@ export const useWeatherStore = defineStore("weather", () => {
           lastWeatherData: data,
         })
       );
-    } catch (err) {
-      console.error("weatherStore save error:", err);
-    }
+    } catch (err) {}
   };
 
   const loadWeatherData = () => {
@@ -30,9 +28,7 @@ export const useWeatherStore = defineStore("weather", () => {
         lastCity.value = parsed.lastCity;
         lastWeatherData.value = parsed.lastWeatherData;
       }
-    } catch (err) {
-      console.error("weatherStore load error:", err);
-    }
+    } catch (err) {}
   };
 
   loadWeatherData();
