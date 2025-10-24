@@ -4,10 +4,9 @@ Vue 3 ile geliştirilmiş, kullanıcı dostu ve modern bir hava durumu uygulamas
 
 ## Proje Özellikleri
 
-- **Kullanıcı Girişi**: Güvenli kullanıcı kimlik doğrulama sistemi
+- **Kullanıcı Girişi**: Kullanıcı kimlik doğrulama sistemi
 - **Şehir Arama**: Şehir ismine göre hava durumu arama
 - **Dinamik Arka Plan**: Hava durumuna göre değişen arka plan tasarımı (weather_code bazlı)
-- **Detaylı Hava Durumu**: Sıcaklık, nem, rüzgar hızı ve diğer meteorolojik veriler
 - **Profil Sayfası**: Kullanıcı bilgileri ve arama geçmişi
 - **Responsive Tasarım**: Tüm cihazlarda uyumlu arayüz
 - **Modern UI**: Tailwind CSS ile şık ve modern tasarım
@@ -19,7 +18,7 @@ Vue 3 ile geliştirilmiş, kullanıcı dostu ve modern bir hava durumu uygulamas
 - **Axios**: HTTP istekleri için
 - **Tailwind CSS**: Utility-first CSS framework
 - **Lucide Icons**: Modern ve şık icon seti
-- **Vue Toast**: Bildirim ve toast mesajları için
+- **Vue Toast**: Toast mesajları için
 
 
 ## Kurulum
@@ -52,12 +51,11 @@ npm run dev
 - Seçilen şehrin hava durumu bilgileri anında görüntülenir
 
 ### 3. Hava Durumu Görüntüleme
-- Sıcaklık, nem, rüzgar hızı gibi detaylı bilgiler gösterilir
 - Sayfa arka planı hava durumuna göre (weather_code) otomatik değişir
 - Görsel olarak hava durumunu daha kolay anlayabilirsiniz
 
 ### 4. Profil Sayfası
-- Profil sayfasından kullanıcı bilgilerinizi görüntüleyin:
+  - Profil sayfasından kullanıcı bilgilerinizi görüntüleyin:
   - Kullanıcı adı
   - E-posta adresi
   - Daha önce aradığınız şehirler ve hava durumu verileri

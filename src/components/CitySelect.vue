@@ -31,10 +31,11 @@
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import { searchCity } from "../../service/weatherService";
+import { useWeatherStore } from "../store/weather";
 
 const emit = defineEmits(["citySelected"]);
-
-const query = ref("");
+const store = useWeatherStore();
+const query = ref(store.lastCity.name || "");
 const cities = ref([]);
 const selectedCity = ref(null);
 const loading = ref(false);

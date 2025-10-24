@@ -66,7 +66,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 const store = useWeatherStore();
 const auth = useAuthStore();
 const { lastCity, lastWeatherData } = storeToRefs(store);
-
+store.loadWeatherData()
 const logout = () => {
     auth.logout();
     router.push('/login')

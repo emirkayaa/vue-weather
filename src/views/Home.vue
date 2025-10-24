@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed,onMounted } from "vue";
 import { useWeatherStore } from "../store/weather";
 import { useAuthStore } from "../store/auth";
 import { Sun, CircleUserRound, LogOut } from "lucide-vue-next";
@@ -84,17 +84,24 @@ import CitySelect from "../components/CitySelect.vue";
 import { getData, weatherDescriptions, weatherIcons } from "../../service/weatherService";
 import router from "../router";
 
-const selectedCity = ref(null);
-const cityData = ref(null);
 const weatherStore = useWeatherStore();
+const selectedCity = ref(weatherStore.lastCity || null);
+const cityData = ref(weatherStore.lastWeatherData || null);
 const auth = useAuthStore();
 const windowWidth = ref(window.innerWidth);
 
 const onCitySelected = async (city) => {
   selectedCity.value = city;
-  cityData.value = await getData(selectedCity.value);
-  weatherStore.setWeatherData(selectedCity, cityData);
+  const data = await getData(city);
+  cityData.value = data;
+  weatherStore.setWeatherData(selectedCity.value, cityData.value);
 };
+
+onMounted(() => {
+  weatherStore.loadWeatherData();
+  selectedCity.value = weatherStore.lastCity;
+  cityData.value = weatherStore.lastWeatherData;
+});
 
 const logout = () => {
   auth.logout();
